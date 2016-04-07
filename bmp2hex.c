@@ -236,12 +236,14 @@ int write_bitmap_as_twam(const char* filename, struct bitmap_t* bitmap, const ch
 		for (unsigned int pos = 0; pos < max_pos; ++pos) {
 			unsigned char data = 0;
 
-			// change LSB<->MSB
-			for (unsigned int bit = 0; bit < 8; ++bit) {
-				if (bitmap->data[line*12+pos] & (1 << bit)) {
-					data |= (1 << (7-bit));
-				}
-			}
+// 			change LSB<->MSB
+// 			for (unsigned int bit = 0; bit < 8; ++bit) {
+// 				if (bitmap->data[line*12+pos] & (1 << bit)) {
+// 					data |= (1 << (7-bit));
+// 				}
+// 			}
+
+			data = bitmap->data[line*12+pos];
 
 			fprintf(fd, "0x%02X, ", data);
 		}
